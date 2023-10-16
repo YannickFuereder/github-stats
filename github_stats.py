@@ -340,9 +340,21 @@ Languages:
             for repo in repos:
                 if repo is None:
                     continue
+
                 name = repo.get("nameWithOwner")
+                user = name.split("/")
+
+                if user.count == 0:
+                    continue
+
+                if user[0] != "YannickFuereder" and user[0] != "Netflix-Database":
+                    continue
+
                 if name in self._repos or name in self._exclude_repos:
                     continue
+
+                print(name)
+
                 self._repos.add(name)
                 self._stargazers += repo.get("stargazers").get("totalCount", 0)
                 self._forks += repo.get("forkCount", 0)
